@@ -7,4 +7,7 @@ async def check_for_reply(msg: types.Message) -> bool:
     if msg.from_user.id == msg.reply_to_message.from_user.id:
         await msg.reply("Команда не може бути відповіддю на твоє ж повідомлення!")
         return False
+    if msg.reply_to_message.from_user.id == msg.bot.id:
+        await msg.reply('Команда не може бути відповіддю на моє повідомлення!')
+        return False
     return True

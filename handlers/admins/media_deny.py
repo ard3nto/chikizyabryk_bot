@@ -1,5 +1,14 @@
 from aiogram import types
-from loader import bot, dp, translator
+from loader import bot, dp, logging
+
+from aiogram.utils.exceptions import (
+    ChatAdminRequired, 
+    MethodNotAvailableInPrivateChats, 
+    CantDemoteChatCreator,
+    CantRestrictSelf, 
+    NotEnoughRightsToRestrict,
+    MethodIsNotAvailable
+)
 
 import config
 
@@ -35,9 +44,27 @@ async def mute(msg: types.Message):
             ), 
             until_date=until_date
         )
+    except ChatAdminRequired:
+        await msg.reply('Я буду дуже радий, якщо мені видадуть права адмнітсратора, щоб я зміг виконати цю команду 😅')
+        return
+    except MethodIsNotAvailable:
+        await msg.reply('👮 Ця команда доступна лише для груп з 2+ адміністраторами')
+        return
+    except MethodNotAvailableInPrivateChats:
+        await msg.reply('😳 Я не знаю як вам вдалося використати цю команду у приватних повідомленнях, але такого робити неможна')
+        return
+    except CantDemoteChatCreator:
+        await msg.reply('🤔 Хм, накласти обмеження на власника чату...\nЩось новеньке..')
+        return
+    except CantRestrictSelf:
+        await msg.reply('Сам себе обмежити я не зможу, доведеться зробити це власноруч\n¯\_(ツ)_/¯')
+        return
+    except NotEnoughRightsToRestrict:
+        await msg.reply('🤭 У мене немає достатньо прав щоб обмежити цього користувача')
+        return
     except Exception as e:
-        e = translator.translate(str(e))
-        await msg.reply(f"Виникла помилка: <code>{e}</code>")
+        # e = translator.translate(str(e))
+        logging.error(f'While restricting media for the user an error occurred: {e}')
         return
     if until_date.seconds == 1:
         await msg.answer(f'Користувачеві <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> заборонено надсилати медіа назавжди')
