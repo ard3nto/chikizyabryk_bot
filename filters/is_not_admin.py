@@ -11,9 +11,10 @@ class IsNotAdminFilter(BoundFilter):
         
     async def check(self, message: types.Message):
         member = await message.bot.get_chat_member(message.chat.id, message.from_user.id)
-        if member.status in ["creator", "administrator"]:
+        if member.status == 'creator':
+            return False
+        elif member.status == 'administrator':
             if member.can_restrict_members:
-                await message.reply('Вибач, але адміністратори не можуть використовувати цю команду.')
                 return False
         return True
 

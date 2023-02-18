@@ -34,4 +34,5 @@ async def handling_an_error(update, error):
 
 @dp.message_handler(commands=['start'], commands_prefix="/", chat_type=["private"])
 async def start_cmd(msg: types.Message):
+    print(msg.get_args())
     await msg.answer(start_msg, disable_web_page_preview=True)

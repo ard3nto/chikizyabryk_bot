@@ -4,9 +4,13 @@ from loader import bot, dp, translator
 
 from functions import promote
 
-@dp.message_handler(commands=['promote'], commands_prefix='!', reply=True, is_admin=True)
+from functions.reply_checker import check_for_reply as is_reply
+
+@dp.message_handler(commands=['promote'], commands_prefix='!', chat_type=["group", "supergroup"], is_admin=True)
 async def promote_someone(msg: types.Message):
-    role = msg.get_args()
+    if not await is_reply(msg):
+        return
+    role = msg.text.split(' ', maxsplit=1)[1]
     if role == 'admin':
         await promote.admin(msg)
     elif role == 'high moder':

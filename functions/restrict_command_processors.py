@@ -14,6 +14,6 @@ async def get_time(splited: list[str]):
         return datetime.timedelta(minutes=int(splited[1][:-1]))
     elif splited[1].endswith("h") and splited[1][:-1].isdigit():
         return datetime.timedelta(hours=int(splited[1][:-1]))
-    elif splited[1].endswith("h") and splited[1][:-1].isdigit():
+    elif splited[1].endswith("d") and splited[1][:-1].isdigit():
         return datetime.timedelta(days=int(splited[1][:-1]))
-    return datetime.timedelta(seconds=int(splited[1][:-1]))
+    return datetime.timedelta(seconds=1)

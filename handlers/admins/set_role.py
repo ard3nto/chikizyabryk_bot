@@ -1,8 +1,12 @@
 from aiogram import types
 from loader import bot, dp, translator
 
-@dp.message_handler(commands=['set_role'], commands_prefix='!', reply=True, is_chat_admin=True, custom_title=True)
+from functions.reply_checker import check_for_reply as is_reply
+
+@dp.message_handler(commands=['set_role'], commands_prefix='!', chat_type=["group", "supergroup"], is_chat_admin=True, custom_title=True)
 async def set_someone(msg: types.Message):
+    if not await is_reply(msg):
+        return
     role = msg.get_args()
     member = await bot.get_chat_member(msg.chat.id, msg.reply_to_message.from_user.id)
     if member.status not in ["creator", "administrator"]:

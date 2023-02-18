@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import bot, dp, translator
 
-@dp.message_handler(commands=['my_role'], commands_prefix='!', custom_title=True)
+@dp.message_handler(commands=['my_role'], commands_prefix='!', chat_type=["group", "supergroup"], custom_title=True)
 async def set_my(msg: types.Message):
     role = msg.get_args()
     member = await bot.get_chat_member(msg.chat.id, msg.from_user.id)

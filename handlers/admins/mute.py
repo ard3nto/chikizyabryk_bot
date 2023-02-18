@@ -6,9 +6,15 @@ import config
 import datetime
 
 from functions import restrict_command_processors as cmd_proc_func
+from functions.reply_checker import check_for_reply as is_reply
+from functions.check_permission import check_permission
 
-@dp.message_handler(commands=['mute'], commands_prefix="!", chat_type=["group", "supergroup"], reply=True, is_admin=True)
+@dp.message_handler(commands=['mute'], commands_prefix="!", chat_type=["group", "supergroup"], is_admin=True)
 async def mute(msg: types.Message):
+    if not await is_reply(msg):
+        return
+    if not await check_permission(msg):
+        return
     until_date = await cmd_proc_func.restrict_command_processor(msg)
     if not until_date:
         return
