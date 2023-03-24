@@ -7,11 +7,11 @@ async def check_permission(msg: types.Message) -> bool:
         return True
     promoter_rights = 0
     target_user_rights = 0
-    for value in dict(member).keys():
-        if value == True:
+    for key in dict(member).keys():
+        if dict(member)[key] == True:
             promoter_rights += 1
-    for value in dict(second_member).keys():
-        if value == True:
+    for key in dict(second_member).keys():
+        if dict(second_member)[key] == True:
             target_user_rights += 1
     if promoter_rights <= target_user_rights:
         await msg.reply('У тебе недостатньо прав для виконання цієї дії')
