@@ -74,4 +74,4 @@ async def set_my(msg: types.Message):
         e = translator.translate(str(e))
         logging.error(f'While setting custom title for the user an error occurred: {e}')
         return
-    await msg.answer(f'💬 Користувачу <code>{html.escape(msg.reply_to_message.from_user.full_name)}</code> встановлено роль [{role}]')
+    await msg.answer(f'💬 Користувачу <code>{html.escape(msg.from_user.full_name)}</code> встановлено роль [{role}]')
