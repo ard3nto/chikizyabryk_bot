@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import bot, dp, logging
 
-import config
+import html
 
 import datetime
 
@@ -52,6 +52,6 @@ async def ban(msg: types.Message):
         logging.error(f'While blocking the user an error occurred: {e}')
         return
     if until_date.seconds == 1:
-        await msg.answer(f'Користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> заблоковано назавжди')
+        await msg.answer(f'Користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{html.escape(msg.reply_to_message.from_user.full_name)}</a> заблоковано назавжди')
         return
-    await msg.answer(f'Користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> заблоковано до {(datetime.datetime.now() + until_date).strftime("%m/%d/%Y, %H:%M")}')
+    await msg.answer(f'Користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{html.escape(msg.reply_to_message.from_user.full_name)}</a> заблоковано до {(datetime.datetime.now() + until_date).strftime("%m/%d/%Y, %H:%M")}')

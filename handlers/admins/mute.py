@@ -10,7 +10,7 @@ from aiogram.utils.exceptions import (
     MethodIsNotAvailable
 )
 
-import config
+import html
 
 import datetime
 
@@ -53,6 +53,6 @@ async def mute(msg: types.Message):
         logging.error(f'While muting the user an error occurred: {e}')
         return
     if until_date.seconds == 1:
-        await msg.answer(f'Користувачеві <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> заборонено надсилати повідомлення назавжди')
+        await msg.answer(f'Користувачеві <a href="tg://user?id={msg.reply_to_message.from_user.id}">{html.escape(msg.reply_to_message.from_user.full_name)}</a> заборонено надсилати повідомлення назавжди')
         return
-    await msg.answer(f'Користувачеві <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> заборонено надсилати повідомлення до {(datetime.datetime.now() + until_date).strftime("%m/%d/%Y, %H:%M")}')
+    await msg.answer(f'Користувачеві <a href="tg://user?id={msg.reply_to_message.from_user.id}">{html.escape(msg.reply_to_message.from_user.full_name)}</a> заборонено надсилати повідомлення до {(datetime.datetime.now() + until_date).strftime("%m/%d/%Y, %H:%M")}')

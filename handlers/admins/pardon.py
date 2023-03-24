@@ -1,6 +1,8 @@
 from aiogram import types
 from loader import bot, dp, logging
 
+import html
+
 from aiogram.utils.exceptions import (
     ChatAdminRequired, 
     MethodNotAvailableInPrivateChats, 
@@ -40,4 +42,4 @@ async def unmute(msg: types.Message):
         # e = translator.translate(str(e))
         logging.error(f'While blocking the user an error occurred: {e}')
         return
-    await msg.answer(f'З користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{msg.reply_to_message.from_user.first_name}</a> знято усі обмеження!')
+    await msg.answer(f'З користувача <a href="tg://user?id={msg.reply_to_message.from_user.id}">{html.escape(msg.reply_to_message.from_user.full_name)}</a> знято усі обмеження!')

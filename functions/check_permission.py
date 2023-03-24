@@ -5,7 +5,15 @@ async def check_permission(msg: types.Message) -> bool:
     second_member = await msg.bot.get_chat_member(msg.reply_to_message.chat.id, msg.reply_to_message.from_user.id)
     if second_member.status not in ['creator', 'administrator']:
         return True
-    elif (member.status == 'administrator' and member.can_restrict_members) and (second_member.can_restrict_members):
+    promoter_rights = 0
+    target_user_rights = 0
+    for value in dict(member).keys():
+        if value == True:
+            promoter_rights += 1
+    for value in dict(second_member).keys():
+        if value == True:
+            target_user_rights += 1
+    if promoter_rights <= target_user_rights:
         await msg.reply('У тебе недостатньо прав для виконання цієї дії')
         return False
     return True
