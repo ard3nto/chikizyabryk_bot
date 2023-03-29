@@ -14,7 +14,7 @@ from aiogram.utils.exceptions import (
 
 from functions.reply_checker import check_for_reply as is_reply
 
-@dp.message_handler(commands=['unmute', 'unban', 'pardon'], chat_type=["group", "supergroup"], commands_prefix='!', is_admin=True)
+@dp.message_handler(commands=['unmute', 'unban', 'pardon', 'пардон', 'розбан'], chat_type=["group", "supergroup"], commands_prefix='!.', is_admin=True)
 async def unmute(msg: types.Message):
     if not await is_reply(msg):
         return

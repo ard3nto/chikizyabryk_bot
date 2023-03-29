@@ -16,7 +16,7 @@ from aiogram.utils.exceptions import (
     MethodIsNotAvailable
 )
 
-@dp.message_handler(commands=['promote'], commands_prefix='!', chat_type=["group", "supergroup"], is_admin=True)
+@dp.message_handler(commands=['promote'], commands_prefix='!.', chat_type=["group", "supergroup"], is_admin=True)
 async def promote_someone(msg: types.Message):
     if not await is_reply(msg):
         return
@@ -30,7 +30,7 @@ async def promote_someone(msg: types.Message):
     else:
         await msg.reply(text='Будь-ласка, напиши одну команду з:\n<code>!promote admin</code>\n<code>!promote high moder</code>\n<code>!promote moder</code>')
 
-@dp.message_handler(commands=['demote'], commands_prefix='!', chat_type=["group", "supergroup"], is_admin=True)
+@dp.message_handler(commands=['demote', 'попустити'], commands_prefix='!.', chat_type=["group", "supergroup"], is_admin=True)
 async def promote_someone(msg: types.Message):
     if not await is_reply(msg):
         return

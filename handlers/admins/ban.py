@@ -18,7 +18,7 @@ from functions import restrict_command_processors as cmd_proc_func
 from functions.reply_checker import check_for_reply as is_reply
 from functions.check_permission import check_permission
 
-@dp.message_handler(commands=['ban'], commands_prefix="!", chat_type=["group", "supergroup"], is_admin=True)
+@dp.message_handler(commands=['ban', 'бан'], commands_prefix="!.", chat_type=["group", "supergroup"], is_admin=True)
 async def ban(msg: types.Message):
     if not await is_reply(msg):
         return

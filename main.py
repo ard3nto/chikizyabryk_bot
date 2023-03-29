@@ -4,12 +4,11 @@ import datetime
 from loader import bot, dp, logging
 import handlers, filters
 
+import config
+
 async def on_startup(x):
     logging.warning('Bot started')
-    await bot.set_my_commands([
-        types.BotCommand("do_not_click", "Не натискати!"),
-        types.BotCommand("ban_me_please", "Чисте задоволення")
-    ])
+    await bot.set_my_commands(config.commands)
 
 async def on_shutdown(x):
     logging.warning('Bot stopped')

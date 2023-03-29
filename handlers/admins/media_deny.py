@@ -19,7 +19,7 @@ from functions.reply_checker import check_for_reply as is_reply
 from functions.check_permission import check_permission
 
 #media
-@dp.message_handler(commands=['media'], commands_prefix="!", chat_type=["group", "supergroup"], is_admin=True)
+@dp.message_handler(commands=['media', 'медіа'], commands_prefix="!.", chat_type=["group", "supergroup"], is_admin=True)
 async def mute(msg: types.Message):
     if not await is_reply(msg):
         return
