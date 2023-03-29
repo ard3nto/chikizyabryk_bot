@@ -5,7 +5,7 @@ import datetime
 from asyncio import sleep
 import random
 
-@dp.message_handler(commands=['roll'], commands_prefix="/.!", is_not_admin=True)
+@dp.message_handler(commands=['roll'], commands_prefix="/.!")
 async def roll(msg: types.Message):
     # random.randint(1, 60)
     args = msg.text.split(' ')[1:]
