@@ -18,7 +18,7 @@ from functions import restrict_command_processors as cmd_proc_func
 from functions.reply_checker import check_for_reply as is_reply
 from functions.check_permission import check_permission
 
-@dp.message_handler(commands=['mute', 'мют', 'заглушити'], commands_prefix="!.", chat_type=["group", "supergroup"], is_admin=True)
+@dp.message_handler(commands=['mute', 'мут', 'заглушити'], commands_prefix="!.", chat_type=["group", "supergroup"], is_admin=True)
 async def mute(msg: types.Message):
     if not await is_reply(msg):
         return
