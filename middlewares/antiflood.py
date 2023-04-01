@@ -21,10 +21,10 @@ class ThrottlingMiddleware(BaseMiddleware):
         try:
             await dp.throttle(key='antiflood_message', rate=limit)
         except Throttled as _t:
-            await self.msg_throttle(msg, _t)
+            await self.message_throttled(msg, _t)
             raise CancelHandler()
     
-    async def msg_throttle(self, msg: types.Message, throttled: Throttled):
+    async def message_throttled(self, msg: types.Message, throttled: Throttled):
         delta = throttled.rate - throttled.delta
         if throttled.exceeded_count <= 2:
             await msg.reply(f'⛔️ <b>Занадто часто</b>\nЗачекай {self.limit} секунд перед наступним повідомленням')
