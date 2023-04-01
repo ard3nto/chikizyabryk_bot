@@ -45,15 +45,4 @@ async def pin_message_handler(msg: types.Message):
         await msg.reply(f'🫣 <b>Виникла помилка:</b> <code>{e}</code>')
     await msg.reply_to_message.reply(f'📌 | Повідомлення успішно закріплено на {text_time}')
     # Schedule message unpinning
-    jobs = scheduler.get_jobs()
-    cur_jobs = 0
-    for job in jobs:
-        # print(job.next_run_time)
-        next_run_time_no_ms = job.next_run_time.replace(microsecond=0)
-        time_diff = next_run_time_no_ms.replace(tzinfo=None) - datetime.now().replace(microsecond=0)
-        print(time_diff)
-        if job.next_run_time.replace(microsecond=0) == datetime.now().replace(microsecond=0) + time:
-            cur_jobs += 1
-    print(cur_jobs)
-    print(f'runtime: {(datetime.now().replace(microsecond=0) + time + timedelta(seconds=(0.04)*cur_jobs))}')
-    scheduler.add_job(unpin_message, 'date', run_date=(datetime.now().replace(microsecond=0) + time + timedelta(seconds=(0.04)*cur_jobs)), args=[msg.chat.id, msg.reply_to_message.message_id])
+    scheduler.add_job(unpin_message, 'date', run_date=(datetime.now() + time), args=[msg.chat.id, msg.reply_to_message.message_id])
