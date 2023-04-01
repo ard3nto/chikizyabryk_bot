@@ -1,6 +1,8 @@
 from aiogram import types
 from loader import bot, translator
 
+import html
+
 from aiogram.utils.exceptions import (
     ChatAdminRequired, 
     MethodNotAvailableInPrivateChats, 
@@ -46,7 +48,7 @@ async def admin(msg: types.Message):
         e = translator.translate(str(e))
         await msg.reply(f"Виникла помилка: <code>{e}</code>")
         return
-    await msg.answer(f'[+] Користувача <code>{msg.reply_to_message.from_user.full_name.replace(">", "").replace("<", "")}</code> призначено адміністратором')
+    await msg.answer(f'[+] Користувача <code>{html.escape(msg.reply_to_message.from_user.full_name)}</code> призначено адміністратором')
 
 async def high_moder(msg: types.Message):
     try:
@@ -83,7 +85,7 @@ async def high_moder(msg: types.Message):
         e = translator.translate(str(e))
         await msg.reply(f"Виникла помилка: <code>{e}</code>")
         return
-    await msg.answer(f'[+] Користувача <code>{msg.reply_to_message.from_user.full_name.replace(">", "").replace("<", "")}</code> призначено старшим модератором')
+    await msg.answer(f'[+] Користувача <code>{html.escape(msg.reply_to_message.from_user.full_name)}</code> призначено старшим модератором')
 
 async def moder(msg: types.Message):
     try:
@@ -117,4 +119,4 @@ async def moder(msg: types.Message):
         e = translator.translate(str(e))
         await msg.reply(f"Виникла помилка: <code>{e}</code>")
         return
-    await msg.answer(f'[+] Користувача <code>{msg.reply_to_message.from_user.full_name.replace(">", "").replace("<", "")}</code> призначено модератором')
+    await msg.answer(f'[+] Користувача <code>{html.escape(msg.reply_to_message.from_user.full_name)}</code> призначено модератором')

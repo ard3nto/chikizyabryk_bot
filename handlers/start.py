@@ -1,7 +1,9 @@
-from aiogram import types
+from aiogram import types, Dispatcher
 from loader import dp, logging, bot
 
 from aiogram.utils.exceptions import RetryAfter
+
+from middlewares.antiflood import antiflood
 
 timemarks = '<code>m</code> - Для хвилин\n<code>h</code> - Для годин\n<code>d</code> - Для днів'
 

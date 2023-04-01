@@ -18,8 +18,11 @@ from functions.reply_checker import check_for_reply as is_reply
 async def unmute(msg: types.Message):
     if not await is_reply(msg):
         return
+    member = await bot.get_chat_member(chat_id=msg.chat.id, user_id=msg.reply_to_message.from_user.id)
+    if not member.status in ['restricted', 'kicked', 'left']:
+        return
     try:
-        await bot.restrict_chat_member(msg.chat.id, msg.reply_to_message.from_user.id, types.ChatPermissions(True, True, True, True, True, True, True, True, True))
+        await bot.restrict_chat_member(msg.chat.id, msg.reply_to_message.from_user.id, types.ChatPermissions(True, True, True, True, True, True, True, True, True, True, True))
     except ChatAdminRequired:
         await msg.reply('Я буду дуже радий, якщо мені видадуть права адмнітсратора, щоб я зміг виконати цю команду 😅')
         return

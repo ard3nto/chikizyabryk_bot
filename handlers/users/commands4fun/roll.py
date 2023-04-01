@@ -5,6 +5,9 @@ import datetime
 from asyncio import sleep
 import random
 
+from middlewares.antiflood import antiflood
+
+@antiflood(limit=5)
 @dp.message_handler(commands=['roll'], commands_prefix="/.!")
 async def roll(msg: types.Message):
     # random.randint(1, 60)

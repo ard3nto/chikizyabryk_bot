@@ -28,7 +28,7 @@ async def ban(msg: types.Message):
     if not until_date:
         return
     try:
-        await bot.kick_chat_member(msg.chat.id, msg.reply_to_message.from_user.id, until_date=until_date)
+        await bot.ban_chat_member(msg.chat.id, msg.reply_to_message.from_user.id, until_date=until_date)
     except ChatAdminRequired:
         await msg.reply('Я буду дуже радий, якщо мені видадуть права адмнітсратора, щоб я зміг виконати цю команду 😅')
         return
